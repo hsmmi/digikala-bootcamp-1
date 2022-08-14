@@ -39,6 +39,25 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIds(array $ids): array // [1, 5, 10]
+    {
+        // SELECT * FROM product WHERE id IN (1, 5, 10)
+        // query builder: generate a query
+        $qb = $this->createQueryBuilder('p'); // p is a shortcut for Product
+        // $qb->where($qb->expr()->in('p.id', $ids)); // not secure
+        $q = $qb
+            ->where('p.id IN (:ids)') // where p.id IN (:ids)
+            ->setParameter('ids', $ids) // setParameter('ids', [1, 5, 10])
+            ->getQuery() // getQuery() returns a Query object
+            ->getResult() // getResult() returns an array of Product objects
+        ;
+        // read doctrine documentation: https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/query-builder.html#query-builder-methods
+
+        // dd($q);
+
+        return $q;
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */
