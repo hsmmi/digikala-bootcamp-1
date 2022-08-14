@@ -14,12 +14,15 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['product'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product'])]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Groups(['product'])]
     private ?int $stock = null;
 
     #[ORM\ManyToMany(targetEntity: Invoice::class, mappedBy: 'products')]
