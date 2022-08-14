@@ -16,9 +16,10 @@ class Invoice
     #[Groups(['inv'])]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'invs')]
-    #[Groups(['inv'])]
-    private Collection $products;
+    // we create new relationship
+    // #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'invs')]
+    // #[Groups(['inv'])]
+    // private Collection $products;
 
     public function __construct()
     {
